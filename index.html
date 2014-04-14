@@ -13,21 +13,25 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-        // find all contacts with 'Bob' in any name field
         var options = new ContactFindOptions();
-        options.filter="byron";
-        var fields = ["displayName", "name"];
-        navigator.contacts.find(fields, onSuccess, onError, options);
+        options.filter="";
+        filter = ["displayName","organizations"];
+        navigator.contacts.find(filter, onSuccess, onError, options);
     }
 
     // onSuccess: Get a snapshot of the current contacts
     //
     function onSuccess(contacts) {
         for (var i=0; i<contacts.length; i++) {
-            $('.contact_echo').html("Display Name = " + contacts[i].displayName);
-
+            for (var j=0; j<contacts[i].organizations.length; j++) {
+                alert("Pref: " + contacts[i].organizations[j].pref + "\n" +
+                        "Type: " + contacts[i].organizations[j].type + "\n" +
+                        "Name: " + contacts[i].organizations[j].name + "\n" +
+                        "Department: "  + contacts[i].organizations[j].department + "\n" +
+                        "Title: "  + contacts[i].organizations[j].title);
+            }
         }
-    }
+    };
 
     // onError: Failed to get the contacts
     //
@@ -40,7 +44,5 @@
   <body>
     <h1>Example</h1>
     <p>Find Contacts</p>
-    <div class="contact_echo"></div>
-<script src="lib/jquery-1.8.2.min.js"></script>
   </body>
 </html>
