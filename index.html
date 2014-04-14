@@ -15,7 +15,7 @@
     function onDeviceReady() {
         // find all contacts with 'Bob' in any name field
         var options = new ContactFindOptions();
-        options.filter="Bob";
+        options.filter="byron";
         var fields = ["displayName", "name"];
         navigator.contacts.find(fields, onSuccess, onError, options);
     }
@@ -24,7 +24,8 @@
     //
     function onSuccess(contacts) {
         for (var i=0; i<contacts.length; i++) {
-            console.log("Display Name = " + contacts[i].displayName);
+            $('.contact_echo').html("Display Name = " + contacts[i].displayName);
+
         }
     }
 
@@ -39,5 +40,7 @@
   <body>
     <h1>Example</h1>
     <p>Find Contacts</p>
+    <div class="contact_echo"></div>
+<script src="lib/jquery-1.8.2.min.js"></script>
   </body>
 </html>
